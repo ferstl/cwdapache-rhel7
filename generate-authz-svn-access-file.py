@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+### WARNING: THIS FILE IS ACTIVELY MANAGED BY PUPPET
+### DO NOT MAKE LOCAL CHANGES OR THEY WILL BE REVERTED
+# 
+
 # Generate a mod_authz_svn AuthzSVNAccessFile with memberships from a Crowd
 #  server
 
@@ -20,9 +24,9 @@ import json
 from httplib2 import Http
 
 try:
-  from urllib.parse import quote
+  from urllib.parse import quote_plus
 except ImportError:
-  from urllib import quote
+  from urllib import quote_plus
 
 from optparse import OptionParser
 
@@ -136,7 +140,7 @@ if options.check_event_token_filename is not None:
 
 
 def membersOf(groupName):
-  return [user['name'] for user in get(um + '/group/user/nested?groupname=' + quote(groupName))['users']]
+  return [user['name'] for user in get(um + '/group/user/nested?groupname=' + quote_plus(groupName))['users']]
 
 print('# Membership from %s' % base)
 print('# eventToken: %s' % newEventToken)
@@ -146,7 +150,7 @@ print()
 # groupName =
 # with a non-empty group name, no comment at the start,
 # and no set of groups already specified
-groupLine = re.compile('^\s*([^#][^=\s]*)\s*=\s*$')
+groupLine = re.compile('^\s*([^#][^=]*?)\s*=\s*$')
 
 shownGroups = False
 
