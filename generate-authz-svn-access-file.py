@@ -1,9 +1,5 @@
 #!/usr/bin/python
 
-### WARNING: THIS FILE IS ACTIVELY MANAGED BY PUPPET
-### DO NOT MAKE LOCAL CHANGES OR THEY WILL BE REVERTED
-# 
-
 # Generate a mod_authz_svn AuthzSVNAccessFile with memberships from a Crowd
 #  server
 
