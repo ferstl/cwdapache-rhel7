@@ -146,7 +146,7 @@ print()
 # groupName =
 # with a non-empty group name, no comment at the start,
 # and no set of groups already specified
-groupLine = re.compile('^\s*([^#][^=\s]*)\s*=\s*$')
+groupLine = re.compile('^\s*([^#][^=]*?)\s*=\s*$')
 
 shownGroups = False
 
