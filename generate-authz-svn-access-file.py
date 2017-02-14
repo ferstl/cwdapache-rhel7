@@ -20,9 +20,9 @@ import json
 from httplib2 import Http
 
 try:
-  from urllib.parse import quote_plus
+  from urllib.parse import quote
 except ImportError:
-  from urllib import quote_plus
+  from urllib import quote
 
 from optparse import OptionParser
 
@@ -136,7 +136,7 @@ if options.check_event_token_filename is not None:
 
 
 def membersOf(groupName):
-  return [user['name'] for user in get(um + '/group/user/nested?groupname=' + quote_plus(groupName))['users']]
+  return [user['name'] for user in get(um + '/group/user/nested?groupname=' + quote(groupName))['users']]
 
 print('# Membership from %s' % base)
 print('# eventToken: %s' % newEventToken)
