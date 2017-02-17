@@ -6,7 +6,6 @@ See [Integrating Crowd with Apache](https://confluence.atlassian.com/x/rgGY) for
 
 We use JIRA rather than Bitbucket's issue tracking:
 
-* For questions or support requests, please [contact our friendly suppport team](https://support.atlassian.com).
 * You can report bugs at [https://ecosystem.atlassian.net/browse/CWDAPACHE/](https://ecosystem.atlassian.net/browse/CWDAPACHE/).
 
 # Building
