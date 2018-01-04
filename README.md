@@ -1,12 +1,6 @@
 # Apache Connector for Crowd
-
+This is the source code for the Crowd Apache/Subversion connector. The connector is no longer supported by Atlassian as of 31 December 2014.
 See [Integrating Crowd with Apache](https://confluence.atlassian.com/x/rgGY) for background information and usage instructions.
-
-# Issues
-
-We use JIRA rather than Bitbucket's issue tracking:
-
-* You can report bugs at [https://ecosystem.atlassian.net/browse/CWDAPACHE/](https://ecosystem.atlassian.net/browse/CWDAPACHE/).
 
 # Building
 
