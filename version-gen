@@ -7,5 +7,5 @@ if [ -f "$VF" ]; then
   cat "$VF"
 else
   # Building from Git
-  echo -n "`git describe --dirty | tr - _`"
+  echo -n "`git describe --tags --dirty | tr - _`"
 fi
