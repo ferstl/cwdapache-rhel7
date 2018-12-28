@@ -72,15 +72,17 @@ These are the steps to build the connector with Docker:
     docker build --build-arg RH_USER=<username> --build-arg RH_PASSWORD=<password> -f Dockerfile-base -t cwdapache-rhel-base:7.4 .
 
     # Build the Apache/Subversion connector
-    docker build -f Dockerfile -t cwdapache:2.2.0 .
+    docker build -f Dockerfile -t cwdapache:2.2.2 .
 
 Copy the connector binaries from the Docker image to your local machine, e.g. `./target`:
 
     mkdir target
 
-    docker run -v $PWD/target:/opt/mount/ --rm --entrypoint cp cwdapache:2.2.0 \
+    docker run -v $PWD/target:/opt/mount/ --rm --entrypoint cp cwdapache:2.2.2 \
     /cwdapache/src/svn/.libs/mod_authz_svn_crowd.so \
     /cwdapache/src/.libs/mod_authnz_crowd.so \
     /opt/mount/
 
 ## Versioning
+The latest tagged version of the original connector was **2.2.2**. This repository will reflect this version number in its tags as long as the actual connector code does not change.
+It is recommendet to use the newest tag when building the connector.
