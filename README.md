@@ -87,3 +87,31 @@ Copy the connector binaries from the Docker image to your local machine, e.g. `.
 ## Versioning
 The latest tagged version of the original connector was **2.2.2**. This repository will reflect this version number in its tags as long as the actual connector code does not change.
 It is recommendet to use the newest tag when building the connector.
+
+## How to create this repository
+
+Clone the original repository and apply the Apache 2.4 changes from the GitHub repository:
+
+    # Clone the original connector and its GitHub Fork
+    git clone https://bitbucket.org/atlassianlabs/cwdapache.git cwdapache-atlassian
+    git clone https://github.com/fgimian/cwdapache.git cwdapache-patched
+
+    # Create a patch file for the Apache 2.4 fix
+    cd cwdapache-patched
+    git format-patch -1 f830744bf9853bf755a1ddce6f1f62e074f560a4
+
+    # Apply the Apache 2.4 Patch
+    cd ../cwdapache-atlassian
+    git apply ../cwdapache-patched/0001-Manually-applied-pull-request-18-to-enable-apache-2..patch
+
+Adjust `configure.ac` to work on RHEL 7:
+
+    AC_CHECK_FILE([/usr/local/apache2/bin/apxs], [APXS="/usr/local/apache2/bin/apxs"], [
+        AC_CHECK_FILE([/sbin/apxs], [APXS="/sbin/apxs"], [
+            AC_CHECK_FILE([/usr/bin/apxs], [APXS="/usr/bin/apxs"], [
+                AC_CHECK_FILE([/usr/sbin/apxs2], [APXS="/usr/sbin/apxs2"], [
+                    AC_MSG_ERROR([Could not locate Apache apxs binary])
+                ])
+            ])
+        ])
+    ])
