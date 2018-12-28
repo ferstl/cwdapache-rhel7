@@ -1,0 +1,28 @@
+FROM registry.access.redhat.com/rhel7:7.4
+
+ARG RH_USER
+ARG RH_PASSWORD
+
+WORKDIR /
+
+RUN subscription-manager register --username $RH_USER --password $RH_PASSWORD --auto-attach; \
+    yum-config-manager --enable rhel-7-server-devtools-rpms; \
+    # Subversion binaries
+    yum-config-manager --add-repo http://opensource.wandisco.com/rhel/7/svn-1.8/RPMS/x86_64/; \
+    yum --nogpgcheck -y install \
+      git \
+      file \
+      autoconf \
+      automake \
+      make \
+      curl \
+      curl-devel \
+      httpd \
+      httpd-devel \
+      mod_dav_svn \
+      libtool \
+      libxml2 \
+      libxml2-devel \
+      subversion \
+      subversion-devel; \
+    yum-config-manager unregister;
