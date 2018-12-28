@@ -59,4 +59,28 @@ To install the connector, run:
 
     make install
 
+### Build with Docker
+In case there is no running RHEL available, you can build the connectors with Docker. However, since the build needs more tools than provided in the official RHEL7 Docker image, you need a valid subscription to install them. For developing purposes, you can sign up for a free [Developer Subscription](https://developers.redhat.com/blog/2016/03/31/no-cost-rhel-developer-subscription-now-available/).
 
+This repository contains two docker files to build the connector:
+- `Dockerfile-base`: Creates a RHEL7 base image containing all the tools for building the connector. You need the credentials for your subscription account to build this image.
+- `Dockerfile`: Builds the connector which can be obtained in a later step.
+
+These are the steps to build the connector with Docker:
+
+    # Build the base image containing all tools to build cwdapache (run once)
+    docker build --build-arg RH_USER=<username> --build-arg RH_PASSWORD=<password> -f Dockerfile-base -t cwdapache-rhel-base:7.4 .
+
+    # Build the Apache/Subversion connector
+    docker build -f Dockerfile -t cwdapache:2.2.0 .
+
+Copy the connector binaries from the Docker image to your local machine, e.g. `./target`:
+
+    mkdir target
+
+    docker run -v $PWD/target:/opt/mount/ --rm --entrypoint cp cwdapache:2.2.0 \
+    /cwdapache/src/svn/.libs/mod_authz_svn_crowd.so \
+    /cwdapache/src/.libs/mod_authnz_crowd.so \
+    /opt/mount/
+
+## Versioning
