@@ -20,4 +20,43 @@ Fortunately, there is another fork of the original repository on [GitHub](https:
 
 Since it was not possible to build @fgimian's connector with the additional adjustments on RHEL7, this repository came to live.
 
+## How to Build/Install
+To build and install the connector, you need Subversion, Apache HTTPD and some additional tools installed.
+Subversion for CentOS/RHEL can be obtained from http://opensource.wandisco.com/rhel/ .
+
+### Build/Install on RHEL 7
+
+First, install the necessary tools to build the connector. The list varies depending on your specific RHEL installation. It might be necessary to install more tools than listed below.
+
+    yum-config-manager --enable rhel-7-server-devtools-rpms; \
+    # Subversion binaries
+    yum-config-manager --add-repo http://opensource.wandisco.com/rhel/7/svn-1.8/RPMS/x86_64/; \
+    yum --nogpgcheck -y install \
+      git \
+      file \
+      autoconf \
+      automake \
+      make \
+      curl \
+      curl-devel \
+      httpd \
+      httpd-devel \
+      mod_dav_svn \
+      libtool \
+      libxml2 \
+      libxml2-devel \
+      subversion \
+      subversion-devel
+
+The steps to build and install the connector on a running RHEL 7 are more or less similar to the steps for CentOS in README-original.md](README-original.md):
+
+    libtoolize
+    autoreconf --install
+    ./configure
+    make
+
+To install the connector, run:
+
+    make install
+
 
